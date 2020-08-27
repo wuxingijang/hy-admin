@@ -1,3 +1,11 @@
 module.exports={
+configureWebpack:{
+    resolve:{
+        alias:{
+            'views':"@/views",
+            'network':"@/netowrk"
+        }
+    }
+},
     lintOnSave:false
 }

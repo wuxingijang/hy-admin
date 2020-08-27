@@ -6,6 +6,10 @@
 <script>
 export default {
   name:"app",
+  created(){
+    localStorage.setItem('admin',123456)
+    
+  }
 }
 </script>
 <style>

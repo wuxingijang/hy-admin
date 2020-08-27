@@ -22,12 +22,12 @@
                     :model="loginForm"
                     :rules="loginFormRules">
                         <!-- //用戶名 -->
-                         <FormItem prop="user">
+                         <FormItem prop="username">
                             <Input 
                             type="text"
                             size="large"
                             prefix="md-person-add"
-                            v-model="loginForm.user"
+                            v-model="loginForm.username"
                             ></Input>
                         </FormItem>
                           <!-- //用戶名結束 -->
@@ -55,7 +55,6 @@
     
 </template>
 <script>
-
 export default {
     name:'login',
     components:{
@@ -64,14 +63,14 @@ export default {
     data(){
         return{
             loginForm:{
-                user:'',
-                password:''
+                username:'admin',
+                password:'123456'
 
             },
             //表达验证规则
             loginFormRules:{
                 //验证用户名是否合法
-                user: [
+                username: [
                     { required: true, message: '用户名不能为空', trigger: 'blur' },
                     {
                         min:3,max:7,message:"用户名长度应该为3-7位"
@@ -81,11 +80,14 @@ export default {
                password:[
                    { required: true, message: '密码不能为空', trigger: 'blur' },
                     {
-                        min:8,max:16,message:"密码长度因该为8-16位"
+                        min:6,max:16,message:"密码长度因该为6-16位"
                     }
                ] 
             }
         }
+    },
+    created(){
+
     },
     methods:{
         resetform(){
@@ -94,8 +96,23 @@ export default {
         },
         //获取表单验证结果
         login () {
-            this.$refs.loginForm.validate(v=>{
+            this.$refs.loginForm.validate(async v=>{
                if(!v) return
+                   if(localStorage.getItem(this.loginForm.username)){
+                       if(this.loginForm.password===localStorage.getItem(this.loginForm.username)){
+                           this.$Message.success('登录成功！');
+                           //设置token 一般是后台传过来的
+                           window.sessionStorage.setItem('token','21232F297A57A5A743894A0E4A801FC3')
+                           this.$router.push('/home')
+                       }
+                       else{
+                            this.$Message.error('密码错误');
+                       }
+                   }
+                   else{
+                       this.$Message.error('用户名不存在！');
+                   }
+                
             })
         }
 }
