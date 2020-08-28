@@ -1,58 +1,47 @@
 <template>
-    <div class='login_container'>
-            <div class="login_box">
-                <!-- logo开始 -->
-                <div class="login_avatar">
-                    <img src="@/assets/logo.png" alt="">
-                </div>
-                <!-- logo结束 -->
+  <div class="login_container">
+    <div class="login_box">
+      <!-- logo开始 -->
+      <div class="login_avatar">
+        <img src="@/assets/logo.png" alt />
+      </div>
+      <!-- logo结束 -->
 
-                <!-- 公司名开始 -->
-                <div class="login_title">
-                 汇业人力外包资源管理平台
-                </div>
-                
-                <!-- 公司名结束 -->
+      <!-- 公司名开始 -->
+      <div class="login_title">汇业人力外包资源管理平台</div>
 
-                      <!-- 表单开始 -->
-                <div class="from">
-                    <Form 
-                    ref="loginForm" 
-                    class="from_box"
-                    :model="loginForm"
-                    :rules="loginFormRules">
-                        <!-- //用戶名 -->
-                         <FormItem prop="username">
-                            <Input 
-                            type="text"
-                            size="large"
-                            prefix="md-person-add"
-                            v-model="loginForm.username"
-                            ></Input>
-                        </FormItem>
-                          <!-- //用戶名結束 -->
-                          <!-- 密碼開始 -->
-                        <FormItem prop="password">
-                            <Input type="password" 
-                            password 
-                            size="large" 
-                            prefix="md-lock"
-                            v-model="loginForm.password">
-                            </Input>
-                        </FormItem>
-                        <!--密碼結束 -->
-                        <!-- 暗流開始 -->
-                        <FormItem class="btns">
-                            <Button @click="login" type="info">登录</Button>
-                            <Button @click="resetform">重置</Button>
-                        </FormItem>
-                        <!-- 暗流結束 -->
-                    </Form>
-                </div>
-            </div>
-        <!-- 變淡結束 -->
+      <!-- 公司名结束 -->
+
+      <!-- 表单开始 -->
+      <div class="from">
+        <Form ref="loginForm" class="from_box" :model="loginForm" :rules="loginFormRules">
+          <!-- //用戶名 -->
+          <FormItem prop="username">
+            <Input type="text" size="large" prefix="md-person-add" v-model="loginForm.username"></Input>
+          </FormItem>
+          <!-- //用戶名結束 -->
+          <!-- 密碼開始 -->
+          <FormItem prop="password">
+            <Input
+              type="password"
+              password
+              size="large"
+              prefix="md-lock"
+              v-model="loginForm.password"
+            ></Input>
+          </FormItem>
+          <!--密碼結束 -->
+          <!-- 暗流開始 -->
+          <FormItem class="btns">
+            <Button @click="login" type="info">登录</Button>
+            <Button @click="resetform">重置</Button>
+          </FormItem>
+          <!-- 暗流結束 -->
+        </Form>
+      </div>
     </div>
-    
+    <!-- 變淡結束 -->
+  </div>
 </template>
 <script>
 export default {
@@ -145,7 +134,6 @@ export default {
        position: absolute;
        left: 50%;
        transform: translate(-50%,-50%);
-
         img{
             height: 100%;
             width: 100%;

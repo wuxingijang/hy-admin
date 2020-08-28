@@ -2,20 +2,32 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from "../views/login/login.vue"
 import home from '@/views/home/home'
+import welcome from '@/views/home/children/welcome'
+import staff from '@/views/home/staff/staff'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
+  {
+    path: "/", redirect: "/login"
+  }
+  ,
+  {
+    path: '/login', component: Login
+  }
+  , {
+    path: '/home', component: home, 
+    redirect:'/staff',
+    children:[ {
+      path: "/welcome",
+      component: welcome
+    },
     {
-      path:"/",redirect:"/login"
+      path:'/staff',
+      component:staff
     }
-    ,
-    {
-      path:'/login',component:Login
-    }
-    ,{
-      path:'/home',component:home
-    }
+  ]
+  }
 ]
 
 const router = new VueRouter({
@@ -27,13 +39,13 @@ const router = new VueRouter({
 // to访问的路由
 // from从哪一个页面跳转过来
 //next放行
-router.beforeEach((to,from,next)=>{
-  if(to.path==='/login') next()
-    const token = window.sessionStorage.getItem('token')
-    //判断是否有token 
-  if(!token || token ==='',token==='null',token===null){
-    return next({path:"login"})
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login') next()
+  const token = window.sessionStorage.getItem('token')
+  //判断是否有token 
+  if (!token || token === '', token === 'null', token === null) {
+    return next({ path: "login" })
   }
-    next()
+  next()
 })
 export default router
