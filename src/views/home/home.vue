@@ -26,7 +26,7 @@
                     :active-name="navstate" 
                     theme="light" 
                     width="auto" 
-                    :open-names="[1]"
+                    :open-names="[]"
                     accordion
                     >
                        <!-- 一级菜单 -->
@@ -53,7 +53,7 @@
                 <!-- 右边菜单结束 -->
                 <!-- 左边类容区域 -->
                 <Content>
-                    <router-view></router-view>
+                    <router-view></router-view>   
                 </Content>
             </Layout>
         </Layout>
@@ -65,19 +65,44 @@
 export default {
     data(){
         return {
+
             menuItem:[
-                {id:1,authname:"账号管理",children:[{id:1,authname:"员工账号",url:"/staff"},]},
-                {id:2,authname:"权限管理",children:[{}]},
-                {id:3,authname:"薪资管理",children:[{}]},
-                {id:4,authname:"数据统计",children:[{}]},
-                {id:5,authname:"部门管理",children:[{}]},
+                {id:1,authname:"员工管理",children:[
+                    {id:1,authname:"员工账号",url:"/staff"},
+                    {id:2,authname:"员工入职"},
+                    {id:3,authname:"员工离职"},
+                    ]},
+                {id:2,authname:"权限管理",children:[
+                    {id:1,authname:"权限列表",url:'/rights'},
+                    {id:1,authname:"角色列表",url:'/roles'},
+                    {id:1,authname:"权限流程",url:'/step'}
+
+
+                    
+                    ]},
+                {id:3,authname:"考勤管理",children:[
+                    {id:1,authname:"打卡配置"},
+                    {id:2,authname:"规则配置"},
+                    {id:3,authname:"打卡记录"},
+                    {id:4,authname:"考勤记录"},
+                ]},
+                {id:4,authname:"数据统计",children:[
+                    {id:1,authname:"考勤统计"},
+                    {id:2,authname:"资金统计"},
+                    {id:3,authname:"人员统计"} 
+                ]},
+                {id:5,authname:"组织架构",children:[
+                    {id:1,authname:"部门管理"},
+                    {id:2,authname:"职位管理"},
+                    {id:2,authname:"职级管理"},
+                ]},
             ],
             childrenItem:[],
-            navstate:''
         }
     },    
     created(){
        this.navstate=window.sessionStorage.getItem('NavState')
+       this.$store.state.roles=JSON.parse(window.localStorage.getItem('role'))
     },
     mounted(){
         this.$nextTick(()=>{
